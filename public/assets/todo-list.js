@@ -21,7 +21,7 @@ $(document).ready(function () {
 
   });
 
-  $('li').on('click', function () {
+  $('ul').on('click', 'li', function () {
     var item = $(this).text().replace(/ /g, "-");
     $.ajax({
       type: 'DELETE',

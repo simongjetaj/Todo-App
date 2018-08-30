@@ -1,7 +1,8 @@
 const bodyParser = require('body-parser'),
     mongoose = require('mongoose');
 
-mongoose.connect('mongodb://simongjetaj:Simon2018@ds123822.mlab.com:23822/todos', {
+require('dotenv').config();
+mongoose.connect(process.env.DB_CONN_STRING, {
     useNewUrlParser: true
 });
 
@@ -33,12 +34,12 @@ module.exports = (app) => {
         });
     });
 
-    app.delete('/todo/:item', async (req, res, next) => {
+    app.delete('/todo/:item', (req, res, next) => {
         // todos = todos.filter(todo => {
         //     return todo.item.replace(/ /g, '-') !== req.params.item
         // });
         try {
-            await Todo.deleteOne({
+            Todo.deleteOne({
                 item: req.params.item.replace(/\-/g, " ")
             }, (err, todos) => {
                 if (err) throw err;
