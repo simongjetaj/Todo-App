@@ -34,12 +34,12 @@ module.exports = (app) => {
         });
     });
 
-    app.delete('/todo/:item', (req, res, next) => {
+    app.delete('/todo/:item', async (req, res, next) => {
         // todos = todos.filter(todo => {
         //     return todo.item.replace(/ /g, '-') !== req.params.item
         // });
         try {
-            Todo.deleteOne({
+            await Todo.deleteOne({
                 item: req.params.item.replace(/\-/g, " ")
             }, (err, todos) => {
                 if (err) throw err;
